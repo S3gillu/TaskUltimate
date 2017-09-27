@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div>
+    <h4 style="text-align:center;margin-top:30px">Employee Portal</h4>
+</div>
+
+<hr />
+@{ Html.RenderPartial("_CreateModalView");}
+<!--Add Jquery Datatable reference files-->
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" />
+<div style="width:90%;">
+    <table id="Jdatatable" class="table table-responsive table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Stream</th>
+                <th>Permanent Address</th>
+                <th>Father  Name</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+    </table>
+</div>
+@section scripts{
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#Jdatatable").DataTable({
+            "ajax": {
+                "url": "api/Home/Get",
+                "type": "GET",
+                "datatype":"json"
+            },
+            "columns": [
+                        { "data": "Id", "autoWidth": true },
+                        { "data": "Name", "autoWidth": true },
+                        { "data": "Email", "autoWidth": true },
+                        { "data": "PhoneNumber", "autoWidth": true },
+                        { "data": "Stream", "autoWidth": true },
+                        { "data": "PermanentAddress", "autoWidth": true },
+                        { "data": "FatherName", "autoWidth": true },
+
+                            {
+                                data: null,
+                                className: "center",
+                                defaultContent: '<a href="" class="editor_edit">Edit</a> | <a href="" class="editor_remove">Delete</a>'
+                            }
+
+
+
+
+
+                        ]
+        });
+    });
+    </script>
+}
